@@ -21,17 +21,23 @@ const HomeContent: React.FC = () => {
   const [wishlist, setWishlist] = useState<Product[]>([]);
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-6">
+    <div className="w-full max-w-7xl mx-auto p-4 sm:p-6">
       {/* Flash Sales Section */}
-      <FlashSales wishlist={wishlist} setWishlist={setWishlist} />
+      <div className="mb-6 sm:mb-12">
+        <FlashSales wishlist={wishlist} setWishlist={setWishlist} />
+      </div>
 
       {/* Products Section */}
-      <Products wishlist={wishlist} setWishlist={setWishlist} />
+      <div className="mb-6 sm:mb-12">
+        <Products wishlist={wishlist} setWishlist={setWishlist} />
+      </div>
 
-      {/* Wishlist Component */}
-      <Wishlist wishlist={wishlist} setWishlist={setWishlist} />
+      {/* Wishlist Section */}
+      <div className="mb-6 sm:mb-12">
+        <Wishlist wishlist={wishlist} setWishlist={setWishlist} />
+      </div>
     </div>
   );
 };
 
-export default HomeContent; // ✅ Now correctly named
+export default HomeContent;
