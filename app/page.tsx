@@ -2,8 +2,7 @@ import TopBanner from "./components/TopBanner";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Banner from "./components/Banner";
-import FlashSales from "./components/FlashSales";
-import Products from "./components/Products";
+import HomeContent from "./components/HomeContent"; 
 import Footer from "./components/Footer";
 
 export default function Home() {
@@ -17,8 +16,7 @@ export default function Home() {
           <Banner />
         </main>
       </div>
-      <FlashSales />
-      <Products />
+      <HomeContent /> 
       <Footer />
     </div>
   );
