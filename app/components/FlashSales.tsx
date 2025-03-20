@@ -15,12 +15,19 @@ interface Product {
   discount: string;
 }
 
+// Timer type
+interface TimeLeft {
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
 // Sample product data
 const products: Product[] = [
   {
     id: 1,
     image: "/assets/zip-hoddie.avif",
-    name: "zip hoddie",
+    name: "Zip Hoddie",
     price: "Rs.800",
     oldPrice: "Rs.1000",
     rating: 4.5,
@@ -60,7 +67,7 @@ const products: Product[] = [
 ];
 
 const FlashSales: React.FC = () => {
-  const [timeLeft, setTimeLeft] = useState<{ hours: number; minutes: number; seconds: number }>({
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     hours: 3,
     minutes: 23,
     seconds: 19,
@@ -110,7 +117,7 @@ const FlashSales: React.FC = () => {
         </div>
         <div className="flex items-center space-x-2 mt-4 sm:mt-0">
           <div className="flex space-x-2 text-lg font-semibold text-gray-800 bg-gray-100 px-4 py-2 rounded-lg">
-            {['hours', 'minutes', 'seconds'].map((unit, index) => (
+            {(["hours", "minutes", "seconds"] as (keyof TimeLeft)[]).map((unit, index) => (
               <span key={unit} className="flex items-center">
                 <span className="bg-white px-3 py-1 rounded shadow-sm">
                   {String(timeLeft[unit]).padStart(2, "0")}
@@ -125,12 +132,15 @@ const FlashSales: React.FC = () => {
       {/* Product Grid Layout */}
       <div className="grid grid-cols-4 gap-6">
         {products.map((product) => (
-          <div key={product.id} className="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div
+            key={product.id}
+            className="relative bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+          >
             {/* Discount Badge */}
             <div className="absolute top-3 left-3 bg-gray-800 text-white text-xs font-semibold px-2 py-1 rounded">
               {product.discount}
             </div>
-            {/* Product Image - Updated to be horizontal */}
+            {/* Product Image */}
             <img
               src={product.image}
               alt={product.name}
@@ -148,7 +158,9 @@ const FlashSales: React.FC = () => {
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
-                      className={`w-4 h-4 ${i < Math.floor(product.rating) ? "text-yellow-400" : "text-gray-300"}`}
+                      className={`w-4 h-4 ${
+                        i < Math.floor(product.rating) ? "text-yellow-400" : "text-gray-300"
+                      }`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -161,6 +173,24 @@ const FlashSales: React.FC = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Carousel Buttons */}
+      <div className="flex justify-center space-x-4 mt-6">
+        <button
+          onClick={handlePrev}
+          disabled={currentIndex === 0}
+          className="p-2 bg-gray-200 rounded-full disabled:opacity-50"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+        <button
+          onClick={handleNext}
+          disabled={currentIndex + productsPerPage >= products.length}
+          className="p-2 bg-gray-200 rounded-full disabled:opacity-50"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
       </div>
     </div>
   );
