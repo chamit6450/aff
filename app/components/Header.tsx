@@ -1,14 +1,34 @@
+"use client";
+
 import Link from "next/link";
 import { Search, ShoppingCart, User, Menu } from "lucide-react";
 
 export default function Header() {
+  const scrollToWishlist = () => {
+    const wishlistSection = document.getElementById("wishlist-section");
+    if (wishlistSection) {
+      wishlistSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <header className="flex justify-between items-center px-6 py-4 shadow-md bg-white">
       <h1 className="text-2xl font-bold">Xclusive</h1>
       <nav className="hidden md:flex space-x-6 text-gray-700">
         <a href="#" className="hover:text-black">Home</a>
-        <a href="#" className="hover:text-black">Contact</a>
-        <a href="#" className="hover:text-black">About</a>
+        <button className="hover:text-black" onClick={scrollToWishlist}>
+          Wishlist
+        </button>
+        <button className="hover:text-black" onClick={scrollToBottom}>
+          Contact
+        </button>        
         <Link href="/signup" className="hover:text-black">
           Sign Up
         </Link>

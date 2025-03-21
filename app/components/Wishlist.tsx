@@ -18,7 +18,7 @@ interface WishlistProps {
 
 const Wishlist: React.FC<WishlistProps> = ({ wishlist, setWishlist }) => {
   return (
-    <div className="mt-8 ml-16"> 
+    <div id="wishlist-section" className="mt-8 ml-16"> 
       <h2 className="text-xl font-bold">❤️ Wishlist</h2>
       <div className="grid grid-cols-4 gap-6 mt-4">
         {wishlist.length === 0 ? (
