@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Search, ShoppingCart, User, Menu } from "lucide-react";
 
 export default function Header() {
@@ -8,7 +9,9 @@ export default function Header() {
         <a href="#" className="hover:text-black">Home</a>
         <a href="#" className="hover:text-black">Contact</a>
         <a href="#" className="hover:text-black">About</a>
-        <a href="#" className="hover:text-black">Sign Up</a>
+        <Link href="/signup" className="hover:text-black">
+          Sign Up
+        </Link>
       </nav>
       <div className="flex items-center space-x-4">
         <Search className="w-5 h-5 text-gray-600" />
