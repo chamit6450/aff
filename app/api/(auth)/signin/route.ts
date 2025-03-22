@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import prisma from "../../../../prisma/lib/prisma"; 
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
 
 export async function POST(req: Request) {
   try {
