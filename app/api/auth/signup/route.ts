@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "../../../../prisma/lib/prisma";
+import prisma from "@/prisma/lib/prisma"; 
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -25,11 +25,17 @@ export async function POST(req: Request) {
       data: { email, password: hashedPassword },
     });
 
+    // Check if JWT_SECRET is defined
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET is not set in environment variables");
+    }
+
     // Generate JWT Token
-    const token = jwt.sign({ id: user.id, email }, process.env.JWT_SECRET!, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user.id, email }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
     return NextResponse.json({ message: "User created successfully", token }, { status: 201 });
-  } catch (error) {
-    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+  } catch (error: any) {
+    console.error("Signup Error:", error);
+    return NextResponse.json({ message: "Internal Server Error", error: error.message }, { status: 500 });
   }
 }
